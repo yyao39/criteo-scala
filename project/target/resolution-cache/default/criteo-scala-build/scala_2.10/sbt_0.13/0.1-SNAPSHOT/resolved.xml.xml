@@ -4,7 +4,7 @@
 		module="criteo-scala-build"
 		revision="0.1-SNAPSHOT"
 		status="integration"
-		publication="20161101131154"
+		publication="20161101141257"
 		e:sbtVersion="0.13" e:scalaVersion="2.10"
 	>
 		<description>

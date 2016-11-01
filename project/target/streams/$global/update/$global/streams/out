@@ -16,7 +16,7 @@
 [0m[[0mdebug[0m] [0m== resolving dependencies for default#criteo-scala-build;0.1-SNAPSHOT [provided][0m
 [0m[[0mdebug[0m] [0m== resolving dependencies default#criteo-scala-build;0.1-SNAPSHOT->org.scala-lang#scala-library;2.10.4 [provided->default(compile)][0m
 [0m[[0minfo[0m] [0mResolving org.scala-lang#scala-library;2.10.4 ...[0m
-[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@73425b00[0m
+[0m[[0mdebug[0m] [0msbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@21166915[0m
 [0m[[0mdebug[0m] [0msbt-chain: module revision found in cache: org.scala-lang#scala-library;2.10.4[0m
 [0m[[0mdebug[0m] [0m	found org.scala-lang#scala-library;2.10.4 in sbt-chain[0m
 [0m[[0mdebug[0m] [0m	[2.10.4] org.scala-lang#scala-library;2.10.4[0m
@@ -1766,7 +1766,7 @@
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-sbt#apply-macro;0.13.8!apply-macro.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.scala-lang#jline;2.10.4!jline.jar[0m
 [0m[[0mdebug[0m] [0m	[NOT REQUIRED] org.fusesource.jansi#jansi;1.4!jansi.jar[0m
-[0m[[0mdebug[0m] [0m:: resolution report :: resolve 1142ms :: artifacts dl 60ms[0m
+[0m[[0mdebug[0m] [0m:: resolution report :: resolve 1257ms :: artifacts dl 47ms[0m
 [0m[[0mdebug[0m] [0m	report for default#criteo-scala-build;0.1-SNAPSHOT compile produced in /Users/yyao39/Documents/IdeaProjects/criteo-scala/project/target/resolution-cache/reports/default-criteo-scala-build-compile.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#criteo-scala-build;0.1-SNAPSHOT runtime produced in /Users/yyao39/Documents/IdeaProjects/criteo-scala/project/target/resolution-cache/reports/default-criteo-scala-build-runtime.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#criteo-scala-build;0.1-SNAPSHOT test produced in /Users/yyao39/Documents/IdeaProjects/criteo-scala/project/target/resolution-cache/reports/default-criteo-scala-build-test.xml[0m
@@ -1780,5 +1780,5 @@
 [0m[[0mdebug[0m] [0m	report for default#criteo-scala-build;0.1-SNAPSHOT docs produced in /Users/yyao39/Documents/IdeaProjects/criteo-scala/project/target/resolution-cache/reports/default-criteo-scala-build-docs.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#criteo-scala-build;0.1-SNAPSHOT pom produced in /Users/yyao39/Documents/IdeaProjects/criteo-scala/project/target/resolution-cache/reports/default-criteo-scala-build-pom.xml[0m
 [0m[[0mdebug[0m] [0m	report for default#criteo-scala-build;0.1-SNAPSHOT scala-tool produced in /Users/yyao39/Documents/IdeaProjects/criteo-scala/project/target/resolution-cache/reports/default-criteo-scala-build-scala-tool.xml[0m
-[0m[[0mdebug[0m] [0m	resolve done (1142ms resolve - 60ms download)[0m
+[0m[[0mdebug[0m] [0m	resolve done (1257ms resolve - 47ms download)[0m
 [0m[[0minfo[0m] [0mDone updating.[0m

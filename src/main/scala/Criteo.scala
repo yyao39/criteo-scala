@@ -2,6 +2,8 @@ import scala.io.Source
 import scala.util.hashing.MurmurHash3
 import breeze.linalg._
 import breeze.numerics._
+
+import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
 /**
@@ -30,8 +32,8 @@ object Criteo {
   def main(args : Array[String]): Unit = {
 
     // start training a logistic regression model using on pass sgd
-    var loss : Double = 0.0
-    var lossb : Double = 0.0
+    var loss: Double = 0.0
+    var lossb: Double = 0.0
     val content = Source.fromFile("sample0.features").getLines.map(_.split(","))
     //val content = Source.fromFile("train.csv").getLines.map(_.split(","))
     val header = content.next()
@@ -56,30 +58,42 @@ object Criteo {
       val x = get_x(row, D)
 
       // step 2, get prediction
-      val p = 1 / (1 + Math.exp(-Math.max(Math.min(w.t * x, 50.0), -50.0)))
+      val p = get_p(x, w)
 
       // for progress validation, useless for learning our model
-      val lossx : Double = logloss(p, y)
+      val lossx: Double = logloss(p, y)
       loss += lossx
       lossb += lossx
 
-      if (num_line % logbatch != 0) {
-        println("reach: ", num_line, "\t total loss: ", loss/num_line)
+      if (num_line % logbatch == 0) {
+        println("reach: ", num_line, "\t total loss: ", loss / num_line)
         lossb = 0.0
       }
 
       // step 3, update model with answer
       update_w(w, g, x, p, y)
     }
-
-    def get_x(row : Map[String, String], D : Int) : DenseVector[Double] = {
-      var fullind = ListBuffer[Int]()
-      for((k,v) <- row) fullind += MurmurHash3.stringHash(k + "=" + v) % D
-      val x = DenseVector.zeros[Double](D)
-      for(index <- fullind) x(index - 1) += 1
-      x
-    }
   }
+
+  def get_x(row: Map[String, String], D: Int): mutable.HashMap[Int, Int] = {
+      var fullind = ListBuffer[Int]()
+      for ((k, v) <- row) fullind += MurmurHash3.stringHash(k + "=" + v) % D
+      val x = new mutable.HashMap[Int, Int]
+
+      for (index <- fullind) {
+        if (x.contains(index)) x(index) += 1
+        else x.+=((index, 1))
+      }
+
+      x
+  }
+
+  def get_p(x: mutable.HashMap[Int, Int], w: DenseVector[Double]): Double = {
+      var wTx = 0.0
+      for ((i, xi) <- x) wTx += w(i) * xi
+      1 / (1 + Math.exp(-Math.max(Math.min(wTx, 50.0), -50.0)))
+  }
+
 
   def logloss(p : Double, y : Double) : Double = {
     val p_bounded = Math.max(Math.min(p, 1.0 - 10e-17), 10e-17)
@@ -90,12 +104,12 @@ object Criteo {
   }
 
   def update_w(w : DenseVector[Double], g : DenseVector[Double],
-               x : DenseVector[Double], p : Double, y : Double) : Unit = {
+               x : mutable.HashMap[Int, Int], p : Double, y : Double) : Unit = {
     val delreg = 0
 
-    for(i <- 0 until x.length) {
+    for((i,xi) <- x) {
       //delreg = (lambda1 * ((-1.) if w(i) < 0. else 1.) +lambda2 * wi])
-      val delta = (p - y) * x(i) + delreg
+      val delta = (p - y) * xi + delreg
       if(adapt > 0) g(i) += delta * delta
       w(i) -= delta * alpha / Math.pow(sqrt(g(i)), adapt)
     }
