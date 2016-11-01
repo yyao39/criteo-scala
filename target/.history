@@ -1,0 +1,9 @@
+set libraryDependencies += "org.scalanlp" %% "breeze" % "0.12"
+set libraryDependencies += "org.scalanlp" %% "breeze-viz" % "0.12"
+set resolvers += "Sonatype Releases" at "https://oss.sonatype.org/content/repositories/releases/"
+console
+set scalaVersion := "2.10.4" // or 2.11.5
+set libraryDependencies += "org.scalanlp" %% "breeze" % "0.12"
+set libraryDependencies += "org.scalanlp" %% "breeze-viz" % "0.12"
+set resolvers += "Sonatype Releases" at "https://oss.sonatype.org/content/repositories/releases/"
+console
