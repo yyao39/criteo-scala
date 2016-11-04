@@ -12,7 +12,12 @@ import scala.collection.mutable.ListBuffer
 object Criteo {
 
   // parameters
-  val train : String = "../train.csv"
+  //  val train : String = "../train.csv"
+  
+  // testing
+  val train_feature : String = "sample0.features"
+  val train_label : String = "sample0.labels"
+
   val test : String = "test.txt"
   val logbatch : Int = 100000
   val D : Int = 16777216
@@ -34,13 +39,15 @@ object Criteo {
     // start training a logistic regression model using on pass sgd
     var loss: Double = 0.0
     var lossb: Double = 0.0
-    //val content = Source.fromFile("sample0.features").getLines.map(_.split(","))
-    val content = Source.fromFile(train).getLines.map(_.split(","))
+    val content = Source.fromFile("sample0.features").getLines.map(_.split(","))
+    //val content = Source.fromFile(train).getLines.map(_.split(","))
     val header = content.next()
     //val header = "Label,i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,i11,i12,i13,c1,c2,c3,c4,c5,c6,c7" +
     //  ",c8,c9,c10,c11,c12,c13,c14,c15,c16,c17,c18,c19,c20,c21,c22,c23,c24,c25,c26"
     val content_map = content.map(header.zip(_).toMap)
     var num_line = 0
+
+    val iter_label = Source.fromFile("sample0.labels").getLines
 
     // main training procedure
     while (content_map.hasNext) {
@@ -48,10 +55,10 @@ object Criteo {
       var row = content_map.next()
       //println(row)
       var y: Double = 0.0
-      if (row("Label") == "1")
+      if (iter_label.next == "1")
         y = 1.0
       //println(y)
-      row -= "Label"
+      //row -= "Label"
       //println(row)
 
       // step 1, get the hashed features
